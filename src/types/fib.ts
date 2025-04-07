@@ -69,9 +69,10 @@ export type PaymentStatusCallback = {
   status: PaymentStatus;
 };
 
+// FIB environments
 export type FIBEnvironment = "dev" | "stage" | "prod";
-// Error response from FIB API
 
+// Error response from FIB API
 type FibApiError = {
   code: string;
   title?: string;
