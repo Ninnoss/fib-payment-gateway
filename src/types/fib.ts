@@ -70,3 +70,16 @@ export type PaymentStatusCallback = {
 };
 
 export type FIBEnvironments = "development" | "staging" | "production";
+
+// Error response from FIB API
+
+type FibApiError = {
+  code: string;
+  title?: string;
+  detail?: string;
+};
+
+export type FibApiErrorResponse = {
+  traceId?: string;
+  errors?: FibApiError[];
+};
