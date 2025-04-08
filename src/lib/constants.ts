@@ -1,5 +1,3 @@
-// Define the possible environment names used in the env variable
-
 import { FIBEnvironment } from "@/types/fib";
 
 // Map environment names to their specific domain parts

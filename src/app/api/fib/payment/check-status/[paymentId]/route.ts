@@ -6,9 +6,12 @@ import { CheckPaymentStatusResponse, FibApiErrorResponse } from "@/types/fib";
 import { NextRequest, NextResponse } from "next/server";
 
 type RouteContext = { params: { paymentId: string } };
-const OPERATION_NAME = "API Check Status"; // Define operation name constant
+const OPERATION_NAME = "Check Status API";
 
-// TODO: cleanup
+/**
+ * Use this endpoint to check the status of a payment.
+ * - wait for the webhook callback first (~15 seconds), if not received, then use this endpoint to check the status of the payment as needed.
+ */
 export async function GET(request: NextRequest, context: RouteContext) {
   const { paymentId } = context.params;
 
@@ -39,14 +42,12 @@ export async function GET(request: NextRequest, context: RouteContext) {
       cache: "no-store",
     });
 
-    // *** Use the reusable error handler ***
     if (!response.ok) {
       return await handleFibApiResponseError(response, OPERATION_NAME, {
         paymentId,
         url: statusUrl,
       });
     }
-    // *************************************
 
     // Handle Success Response (including defensive check for errors in 200 OK)
     const statusData: CheckPaymentStatusResponse | FibApiErrorResponse = await response.json();
