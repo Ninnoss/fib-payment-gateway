@@ -8,6 +8,9 @@ type RouteContext = { params: { paymentId: string } };
 
 const OPERATION_NAME = "Cancel Payment API";
 
+/**
+ * This should be used only if you want to cancel a payment that is not yet paid.
+ */
 export async function POST(request: NextRequest, context: RouteContext) {
   const { paymentId } = context.params;
 
